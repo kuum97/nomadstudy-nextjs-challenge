@@ -1,3 +1,32 @@
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
 export default function IndexPage() {
-  return <div>Home</div>;
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const { results } = await (
+        await fetch(`https://books-api.nomadcoders.workers.dev/lists
+    `)
+      ).json();
+      setCategory(results);
+    };
+    fetchData();
+  }, []);
+  return (
+    <ul>
+      {category?.map((item) => (
+        <li key={item.list_name}>
+          <Link
+            href={{
+              pathname: `/list/[list_name]`,
+              query: { list_name: item.list_name },
+            }}
+          >
+            {item.display_name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
 }
