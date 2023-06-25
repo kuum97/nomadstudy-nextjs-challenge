@@ -20,7 +20,7 @@ export default function IndexPage() {
           <Link
             href={{
               pathname: `/list/[list_name]`,
-              query: { list_name: item.list_name },
+              query: { list_name: item.list_name_encoded },
             }}
           >
             {item.display_name}
