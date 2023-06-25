@@ -14,19 +14,32 @@ export default function IndexPage() {
     fetchData();
   }, []);
   return (
-    <ul>
-      {category?.map((item) => (
-        <li key={item.list_name}>
-          <Link
-            href={{
-              pathname: `/list/[list_name]`,
-              query: { list_name: item.list_name_encoded },
-            }}
-          >
-            {item.display_name}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <>
+      <div>
+        <ul>
+          {category?.map((item) => (
+            <li key={item.list_name}>
+              <Link
+                href={{
+                  pathname: `/list/[list_name]`,
+                  query: { list_name: item.list_name_encoded },
+                }}
+              >
+                {item.display_name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <style jsx>{`
+        div {
+          display: flex;
+          justify-content: center;
+        }
+        ul {
+          width: 500px;
+        }
+      `}</style>
+    </>
   );
 }

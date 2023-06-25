@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Detail() {
   const [books, setBooks] = useState([]);
@@ -16,10 +17,33 @@ export default function Detail() {
     fetchData();
   }, [router.query.id]);
   return (
-    <ul>
-      {books?.map((book) => (
-        <li key={book.rank}>{book.title}</li>
-      ))}
-    </ul>
+    <>
+      <div>
+        <ul>
+          {books?.map((book) => (
+            <li key={book.rank}>
+              <img src={book.book_image} />
+              {book.title}
+              <br />
+              {book.author}
+              <Link href={book.amazon_product_url}>&rarr;buy now</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <style jsx>{`
+        div {
+          display: flex;
+          justify-content: center;
+        }
+        ul {
+          width: 500px;
+        }
+        img {
+          width: 150px;
+          height: 200px;
+        }
+      `}</style>
+    </>
   );
 }
